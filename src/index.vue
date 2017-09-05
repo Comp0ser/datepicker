@@ -59,6 +59,9 @@ export default {
       this.datepicker.jumpToDate()
     },
     setDate (newDate, oldDate) {
+      if (!newDate) {
+        return this.datepicker.clear()
+      }
       newDate && this.datepicker.setDate(newDate)
     },
     dateUpdated (selectedDates, dateStr) {
