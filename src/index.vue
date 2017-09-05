@@ -62,11 +62,12 @@ export default {
       if (newDate) {
         this.datepicker.setDate(newDate)
       } else {
+        this.selectedDates = null
         this.datepicker.clear()
       }
     },
     dateUpdated (selectedDates, dateStr) {
-      this.date = dateStr
+        this.date = dateStr
     }
   },
 
