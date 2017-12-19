@@ -1,6 +1,6 @@
 <template>
-  <component :value="date" :placeholder="placeholder" 
-    :inputClass="inputClass" :alignment="alignment" 
+  <component :value="date" :placeholder="placeholder"
+    :inputClass="inputClass" :alignment="alignment"
     :is="wrap ? 'WrapperInput' : 'SingleInput'">
     <slot></slot>
   </component>
@@ -39,6 +39,7 @@ export default {
     if (!this.datepicker) {
       this.config.onValueUpdate = this.dateUpdated
       this.datepicker = new Flatpickr(this.$el, this.config)
+      this.initBlur()
       this.setDate(this.value)
     }
     this.$watch('config', this.redraw)
@@ -68,6 +69,17 @@ export default {
     },
     dateUpdated (selectedDates, dateStr) {
         this.date = dateStr
+    },
+    initBlur () {
+      let dp = this.datepicker
+      this.datepicker._input.addEventListener("blur", function(event) {
+        let enter = new KeyboardEvent('keydown', {
+          bubbles : true,
+          cancelable : true,
+          key : "Enter"
+        })
+        dp._input.dispatchEvent(enter)
+      }, true);
     }
   },
 
