@@ -72,12 +72,20 @@ export default {
     },
     initBlur () {
       let dp = this.datepicker
+      this.datepicker._input.addEventListener("keydown", function(event) {
+        if (!isNaN(event.key) && !dp._input.value.includes(',')) {
+          dp._input.value = 'Mo, ' + dp._input.value
+        }
+      }, true);
       this.datepicker._input.addEventListener("blur", function(event) {
         let enter = new KeyboardEvent('keydown', {
           bubbles : true,
           cancelable : true,
           key : "Enter"
         })
+        if (!dp._input.value.includes(',')) {
+          dp._input.value = 'Mo, ' + dp._input.value
+        }
         dp._input.dispatchEvent(enter)
       }, true);
     }
