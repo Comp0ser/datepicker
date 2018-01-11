@@ -77,6 +77,7 @@ export default {
           dp._input.value = 'Mo, ' + dp._input.value
         }
       }, true);
+      let self = this
       this.datepicker._input.addEventListener("blur", function(event) {
         let enter = new KeyboardEvent('keydown', {
           bubbles : true,
