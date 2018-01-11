@@ -86,6 +86,11 @@ export default {
         if (dp._input.value.length > 0 && !dp._input.value.includes(',')) {
           dp._input.value = 'Mo, ' + dp._input.value
         }
+        if (dp._input.value.length == 0) {
+          self.selectedDates = null
+          self.$emit('input', null)
+          self.datepicker.clear()
+        }
         dp._input.dispatchEvent(enter)
       }, true);
     }
